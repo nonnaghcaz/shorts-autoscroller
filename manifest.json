@@ -5,13 +5,6 @@
     "version": "0.0.1",
     "content_scripts": [
         {
-            "js": ["scripts/tiktok.js"],
-            "matches": [
-                "https://www.tiktok.com/*/video/*",
-                "https://www.tiktok.com/foryou"
-            ]
-        },
-        {
             "js": ["scripts/youtube.js"],
             "matches": [
                 "https://www.youtube.com/shorts/*"
