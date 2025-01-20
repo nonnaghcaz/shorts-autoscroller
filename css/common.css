@@ -1,0 +1,12 @@
+body {
+    font: 1rem 'Roboto', sans-serif;
+}
+
+svg {
+    fill: var(--bs-light);
+}
+
+.icon {
+    width: 1rem;
+    height: 1rem;
+}

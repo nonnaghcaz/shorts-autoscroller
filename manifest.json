@@ -1,14 +1,38 @@
 {
-    "manifest_version": 3,
-    "name": "Shorts Autoscroller",
-    "description": "Auto-scrolls TikTok and YouTube shorts",
-    "version": "0.0.1",
+    "action": {
+        "default_icon": {
+        },
+        "default_popup": "popup.html"
+    },
+    "author": "Zach Gannon",
+    "background": {
+        "service_worker": "/js/background.js",
+        "type": "module"
+    },
     "content_scripts": [
         {
-            "js": ["scripts/youtube.js"],
             "matches": [
                 "https://www.youtube.com/shorts/*"
-            ]
+            ],
+            "js": [
+                "/js/content.js"
+            ],
+            "type": "module"
         }
-    ]
+    ],
+    "description": "Auto-scrolls YouTube shorts.",
+    "icons": {
+    },
+    "manifest_version": 3,
+    "name": "Shorts Autoscroller",
+    "options_page": "settings.html",
+    "optional_host_permissions": [
+        "<all_urls>"
+    ],
+    "permissions": [
+        "activeTab",
+        "scripting"
+    ],
+    "short_name": "SaS",
+    "version": "0.0.1"
 }
