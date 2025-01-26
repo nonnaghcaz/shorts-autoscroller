@@ -1,16 +1,13 @@
-
-console.log("Content script loaded");
-
-const SHORTS_PLAYER_XPATH = '//*[@id="shorts-player"]';
-const SHORTS_PLAYER_VIDEO_XPATH = `${SHORTS_PLAYER_XPATH}//video`;
-const NAVIGATION_BUTTON_DOWN_XPATH = '//*[@id="navigation-button-down"]//button';
-const SPONSORED_BADGE_XPATH = '//*[contains(@class, "badge-shape-wiz__text")]';
-const INTERVAL_MS = 100;
-
-checkIfVideoEnded();
+import { INTERVAL_MS, NAVIGATION_BUTTON_DOWN_XPATH, SHORTS_PLAYER_VIDEO_XPATH, SPONSORED_BADGE_XPATH } from "./utils/constants.js";
+import { findElementByXpath, getCurrentUrl, waitForUrlChange, waitForXpath } from "./utils/dom.js";
 
 var sinceSponsored = 0;
 var wasJustSponsored = false;
+
+export function main() {
+    console.log("Content script main function");
+    checkIfVideoEnded();
+}
 
 
 function checkIfVideoEnded() {
@@ -85,82 +82,4 @@ function onVideoEnded() {
     }
 }
 
-function findElementsByVisibleText(text) {
-    return findElementsByXpath(`//*[contains(text(), "${text}")]`);
-}
-
-function waitForUrlChange(originalUrl) {
-    return new Promise((resolve) => {
-        const checkInterval = setInterval(() => {
-            var currentUrl = getCurrentUrl();
-            if (currentUrl !== originalUrl) {
-                clearInterval(checkInterval);
-                resolve();
-            }
-        }, INTERVAL_MS);
-    });
-}
-
-function findElementsByXpath(path) {
-    return document.evaluate(
-      path, document, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
-  }
-  
-function findElementByXpath(path) {
-    return document.evaluate(
-        path, 
-        document, 
-        null, 
-        XPathResult.FIRST_ORDERED_NODE_TYPE, 
-        null
-    ).singleNodeValue;
-}
-
-function waitForXpath(xpath) {
-    return new Promise((resolve) => {
-        if (findElementByXpath(xpath)) {
-            return resolve(findElementByXpath(xpath));
-        }
-    
-        const observer = new MutationObserver((mutations) => {
-            if (findElementByXpath(xpath)) {
-                resolve(findElementByXpath(xpath));
-                observer.disconnect();
-            }
-        });
-    
-        observer.observe(document.body, {
-            childList: true,
-            subtree: true,
-        });
-    });
-}
-
-function waitForElement(selector) {
-    return new Promise((resolve) => {
-        if (document.querySelector(selector)) {
-            return resolve(document.querySelector(selector));
-        }
-    
-        const observer = new MutationObserver((mutations) => {
-            if (document.querySelector(selector)) {
-                resolve(document.querySelector(selector));
-                observer.disconnect();
-            }
-        });
-    
-        observer.observe(document.body, {
-            childList: true,
-            subtree: true,
-        });
-    });
-}
-
-function getCurrentUrl() {
-    return window.location.href;
-}
-
-function isCurrentUrl(url) {
-    return getCurrentUrl() === url;
-}
 

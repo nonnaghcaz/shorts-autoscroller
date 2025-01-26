@@ -15,11 +15,15 @@
                 "https://www.youtube.com/shorts/*"
             ],
             "js": [
-                "/js/content.js"
+                "/js/content_script.js"
             ],
             "type": "module"
         }
     ],
+    "web_accessible_resources": [{
+        "matches": ["<all_urls>"],
+        "resources": ["/js/content_main.js"]
+    }],
     "description": "Auto-scrolls YouTube shorts.",
     "icons": {
     },
