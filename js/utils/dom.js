@@ -2,7 +2,7 @@ function findElementsByVisibleText(text) {
     return findElementsByXpath(`//*[contains(text(), "${text}")]`);
 }
 
-function waitForUrlChange(originalUrl) {
+function waitForUrlChange(originalUrl, interval_ms) {
     return new Promise((resolve) => {
         const checkInterval = setInterval(() => {
             var currentUrl = getCurrentUrl();
@@ -10,7 +10,7 @@ function waitForUrlChange(originalUrl) {
                 clearInterval(checkInterval);
                 resolve();
             }
-        }, INTERVAL_MS);
+        }, interval_ms);
     });
 }
 

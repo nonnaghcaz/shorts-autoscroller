@@ -73,7 +73,7 @@ function onVideoEnded() {
     const nextButton = findElementByXpath(NAVIGATION_BUTTON_DOWN_XPATH);
     if (nextButton) {
         nextButton.click();
-        waitForUrlChange(currentUrl).then(() => {
+        waitForUrlChange(currentUrl, INTERVAL_MS).then(() => {
             _handleSinceSponsored();
             return checkIfVideoEnded();
         });
