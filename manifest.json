@@ -22,7 +22,7 @@
     ],
     "web_accessible_resources": [{
         "matches": ["<all_urls>"],
-        "resources": ["/js/content_main.js"]
+        "resources": ["/js/content_main.js", "/js/utils/constants.js", "/js/utils/dom.js"]
     }],
     "description": "Auto-scrolls YouTube shorts.",
     "icons": {
