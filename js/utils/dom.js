@@ -2,7 +2,7 @@ function findElementsByVisibleText(text) {
     return findElementsByXpath(`//*[contains(text(), "${text}")]`);
 }
 
-function waitForUrlChange(originalUrl, interval_ms) {
+function waitForUrlChange(originalUrl, interval_ms=1000) {
     return new Promise((resolve) => {
         const checkInterval = setInterval(() => {
             var currentUrl = getCurrentUrl();
